@@ -4,11 +4,12 @@ import router from './router/router.js'
 import store from './store/store.js'
 
 import '@/plugins/vuetify.js'
+import '@/utils/permission.js'
 
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app')

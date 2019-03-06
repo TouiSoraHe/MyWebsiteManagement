@@ -5,11 +5,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    { path: '/login', component: () => import('@/views/login/login.vue'), },
-    { path: '/404', component: () => import('@/views/404/404.vue'), },
+    { path: '/login', component: () => import('@/views/login/login.vue') },
+    { path: '/404', component: () => import('@/views/404/404.vue') },
 
-    { path: '/', name: 'helloworld', component: () => import('@/views/helloworld.vue'), },
+    { path: '/', name: 'helloworld', component: () => import('@/views/helloworld.vue') },
 
-    { path: '*', redirect: '/404', hidden: true, },
-  ],
+    { path: '*', redirect: '/404', hidden: true }
+  ]
 })

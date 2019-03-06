@@ -6,6 +6,7 @@ import '@mdi/font/css/materialdesignicons.css'
 Vue.use(Vuetify, {
   iconfont: 'mdi',
   icons: {
-    'menu': 'mdi-menu',
-  },
+    'account': 'mdi-account',
+    'lock-outline': 'mdi-lock-outline'
+  }
 })
