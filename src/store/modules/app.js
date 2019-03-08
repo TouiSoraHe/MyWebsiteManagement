@@ -1,4 +1,4 @@
-import { deleteTag } from '@/api/api.js'
+import { getBlogInfos, updateBlogInfo, getBlog, getTags, addBlog, updateBlog } from '@/api/api.js'
 
 const app = {
   state: {
@@ -6,10 +6,55 @@ const app = {
   mutations: {
   },
   actions: {
-    Test({ commit }, id) {
+    GetBlog({ commit }, id) {
       return new Promise((resolve, reject) => {
-        deleteTag(1).then(response => {
-          resolve()
+        getBlog(id).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetBlogInfos({ commit }) {
+      return new Promise((resolve, reject) => {
+        getBlogInfos().then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetTags({ commit }) {
+      return new Promise((resolve, reject) => {
+        getTags().then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    UpdateBlogInfo({ commit }, bloginfo) {
+      return new Promise((resolve, reject) => {
+        updateBlogInfo(bloginfo).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    AddBlog({ commit }, blog) {
+      return new Promise((resolve, reject) => {
+        addBlog(blog).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    UpdateBlog({ commit }, blog) {
+      return new Promise((resolve, reject) => {
+        updateBlog(blog).then(response => {
+          resolve(response)
         }).catch(error => {
           reject(error)
         })

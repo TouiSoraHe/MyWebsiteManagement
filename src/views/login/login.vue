@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-alert
-      :value="alert"
+      v-model="alert"
       type="error"
       transition="scale-transition"
       dismissible

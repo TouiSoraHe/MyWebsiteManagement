@@ -4,7 +4,9 @@ import router from './router/router.js'
 import store from './store/store.js'
 
 import '@/plugins/vuetify.js'
+import '@/plugins/vue-simplemde.js'
 import '@/utils/permission.js'
+import '@/utils/utils.js'
 
 Vue.config.productionTip = false
 
