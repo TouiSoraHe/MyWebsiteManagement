@@ -49,6 +49,13 @@ export function updateBlog(blog) {
   })
 }
 
+export function deleteBlog(id) {
+  return request({
+    url: '/api/blog/' + id,
+    method: 'delete'
+  })
+}
+
 export function getTags() {
   return request({
     url: '/api/tag',

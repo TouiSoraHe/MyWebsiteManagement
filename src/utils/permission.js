@@ -3,7 +3,6 @@ import { getToken } from '@/utils/auth.js' // getToken from cookie
 
 const whiteList = ['/login', '/404'] // 不重定向白名单
 router.beforeEach((to, from, next) => {
-  console.log(getToken())
   if (getToken()) {
     if (to.path === '/login') {
       next({ path: '/' })

@@ -7,7 +7,7 @@
         transition="scale-transition"
         dismissible
       >
-        {{ errorAlert }}
+        {{ alertMessage }}
       </v-alert>
     </div>
     <div>
@@ -106,7 +106,7 @@ export default {
       },
       tags: [],
       alert: false,
-      errorAlert: '',
+      alertMessage: '',
       alertStatus: 'error'
     }
   },
@@ -142,11 +142,8 @@ export default {
     if (this.id) {
       this.$store.dispatch('GetBlog', this.id).then((response) => {
         this.blog = response.data
-        console.log(this.blog)
       }).catch((error) => {
-        this.errorAlert = error.response.data || error
-        this.alert = true
-        this.alertStatus = 'error'
+        this.setAlert('error', error.response.data || error)
       })
       this.$store.dispatch('GetTags').then((response) => {
         this.tags = response.data
@@ -159,32 +156,32 @@ export default {
       // 说明这是新建
       if (this.id === undefined) {
         this.$store.dispatch('AddBlog', this.blog).then(response => {
-          this.errorAlert = '新建成功'
-          this.alert = true
-          this.alertStatus = 'success'
+          this.setAlert('success', '新建成功')
           this.blog = response.data
         }).catch(error => {
-          this.errorAlert = error.response.data || error
-          this.alert = true
-          this.alertStatus = 'error'
+          this.setAlert('error', error.response.data || error)
         })
         // 说明这是编辑
       } else {
         this.$store.dispatch('UpdateBlog', this.blog).then(response => {
-          this.errorAlert = '修改成功'
-          this.alert = true
-          this.alertStatus = 'success'
+          this.setAlert('success', '修改成功')
           this.blog = response.data
         }).catch(error => {
-          this.errorAlert = error.response.data || error
-          this.alert = true
-          this.alertStatus = 'error'
+          this.setAlert('error', error.response.data || error)
         })
       }
     },
     remove(item) {
       this.tagNames.splice(this.tagNames.indexOf(item), 1)
       this.tagNames = [...this.tagNames]
+    },
+    setAlert(status, message) {
+      this.alert = true
+      this.alertStatus = status
+      this.alertMessage = message
+      window.setTimeout(() => {
+        this.alert = false
+      }, 3000)
     }
   }
 }

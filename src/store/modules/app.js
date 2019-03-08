@@ -1,4 +1,4 @@
-import { getBlogInfos, updateBlogInfo, getBlog, getTags, addBlog, updateBlog } from '@/api/api.js'
+import { getBlogInfos, updateBlogInfo, getBlog, getTags, addBlog, updateBlog, deleteBlog } from '@/api/api.js'
 
 const app = {
   state: {
@@ -9,6 +9,15 @@ const app = {
     GetBlog({ commit }, id) {
       return new Promise((resolve, reject) => {
         getBlog(id).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    DeleteBlog({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        deleteBlog(id).then(response => {
           resolve(response)
         }).catch(error => {
           reject(error)
