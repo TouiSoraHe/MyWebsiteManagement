@@ -1,6 +1,6 @@
 const path = require('path')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 // 作为配置文件，直接导出配置对象即可
@@ -20,13 +20,13 @@ module.exports = {
         // 将主机标头的原点更改为目标URL
         changeOrigin: true,
         pathRewrite: {
-          '/api': '', // 需要rewrite的,
-        },
-      },
-    },
+          '/api': '' // 需要rewrite的,
+        }
+      }
+    }
   },
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@', resolve('src'))
-  },
+  }
 }

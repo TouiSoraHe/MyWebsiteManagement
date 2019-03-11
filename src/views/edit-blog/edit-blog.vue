@@ -73,7 +73,7 @@
           </v-flex>
           <v-flex xs12>
             <v-spacer />
-            <v-btn @click="submit">
+            <v-btn :loading="submitBtnLoading" @click="submit">
               提交
             </v-btn>
           </v-flex>
@@ -107,7 +107,8 @@ export default {
       tags: [],
       alert: false,
       alertMessage: '',
-      alertStatus: 'error'
+      alertStatus: 'error',
+      submitBtnLoading: false
     }
   },
   computed: {
@@ -154,20 +155,25 @@ export default {
   methods: {
     submit() {
       // 说明这是新建
+      this.submitBtnLoading = true
       if (this.id === undefined) {
         this.$store.dispatch('AddBlog', this.blog).then(response => {
           this.setAlert('success', '新建成功')
           this.blog = response.data
+          this.submitBtnLoading = false
         }).catch(error => {
           this.setAlert('error', error.response.data || error)
+          this.submitBtnLoading = false
         })
         // 说明这是编辑
       } else {
         this.$store.dispatch('UpdateBlog', this.blog).then(response => {
           this.setAlert('success', '修改成功')
           this.blog = response.data
+          this.submitBtnLoading = false
         }).catch(error => {
           this.setAlert('error', error.response.data || error)
+          this.submitBtnLoading = false
         })
       }
     },
