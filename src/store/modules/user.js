@@ -4,9 +4,14 @@ import { removeToken } from '@/utils/auth.js'
 
 const user = {
   state: {
+    userName: ''
   },
 
   mutations: {
+    changeUserName(state, newValue) {
+      state.userName = newValue
+      console.log(state.userName)
+    }
   },
 
   actions: {
@@ -15,6 +20,7 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
+          commit('changeUserName', username)
           resolve()
         }).catch(error => {
           reject(error)

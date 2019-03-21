@@ -43,7 +43,7 @@
       <v-list>
         <span v-for="route in routes" :key="route.path">
           <v-list-group
-            v-if="route.children.length>1"
+            v-if="route.meta.group"
             :prepend-icon="$vuetify.icons[route.meta.icon]"
             no-action
           >
@@ -59,7 +59,7 @@
               <v-list-tile
                 v-if="childRoute.meta.navbar"
                 :key="childRoute.path"
-                @click.stop="$router.push(route.path+'/'+childRoute.path)"
+                @click.stop="clickLink(route.path+'/'+childRoute.path)"
               >
                 <v-list-tile-action>
                   <v-icon>{{ $vuetify.icons[childRoute.meta.icon] }}</v-icon>
@@ -72,7 +72,7 @@
 
           </v-list-group>
 
-          <v-list-tile v-else-if="route.children.length=1" @click.stop="$router.push(route.path+'/'+route.children[0].path)">
+          <v-list-tile v-else-if="!route.meta.group" @click.stop="clickLink(route.path+'/'+route.children[0].path)">
             <v-list-tile-action>
               <v-icon>
                 {{ $vuetify.icons[route.children[0].meta.icon] }}
@@ -106,6 +106,28 @@ export default {
       const that = this
       this.$store.dispatch('FedLogOut').then(() => {
         that.$router.push({ path: '/login' })
+      })
+    },
+    clickLink(path) {
+      console.log(path)
+      console.log(this.$router.currentRoute.fullPath)
+      if (this.$router.currentRoute.fullPath === path) {
+        this.reloadRoute()
+      } else {
+        this.$router.push({
+          path
+        })
+      }
+    },
+    reloadRoute() {
+      var curruntPath = this.$router.history.current.fullPath
+      this.$router.replace({
+        path: '/_empty'
+      })
+      setTimeout(() => {
+        this.$router.replace({
+          path: curruntPath
+        })
       })
     }
   }

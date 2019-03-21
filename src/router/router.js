@@ -15,7 +15,7 @@ export default new Router({
       path: '/home',
       component: Layout,
       name: 'home',
-      meta: { title: '首页', icon: 'home', navbar: true },
+      meta: { title: '首页', icon: 'home', navbar: true, group: false },
       children: [
         {
           path: 'Home',
@@ -31,7 +31,7 @@ export default new Router({
       component: Layout,
       redirect: '/blog-management/blog-list',
       name: 'blog-management',
-      meta: { title: '博客管理', icon: 'blogger', navbar: true },
+      meta: { title: '博客管理', icon: 'blogger', navbar: true, group: true },
       children: [
         {
           path: 'blog-list',
@@ -52,11 +52,35 @@ export default new Router({
             default: () => import('@/views/edit-blog/edit-blog.vue')
           },
           props: { default: true },
-          meta: { title: '编辑博客', icon: 'plus' }
+          meta: { title: '编辑博客', icon: '' }
+        }
+      ]
+    },
+    {
+      path: '/exception-list',
+      component: Layout,
+      name: 'exception-list',
+      meta: { title: '异常列表', icon: 'bug', navbar: true, group: false },
+      children: [
+        {
+          path: 'exception',
+          name: 'exception',
+          component: () => import('@/views/exception-list/exception-list.vue'),
+          meta: { title: '异常列表', icon: 'bug', navbar: true }
+        },
+        {
+          path: 'view-exception-info/:id',
+          name: 'view-exception-info',
+          components: {
+            default: () => import('@/views/view-exception-info/view-exception-info.vue')
+          },
+          props: { default: true },
+          meta: { title: '异常详情', icon: '' }
         }
       ]
     },
 
+    { path: '/_empty' },
     { path: '*', redirect: '/404' }
   ]
 })

@@ -1,13 +1,5 @@
 <template>
   <v-content>
-    <v-alert
-      v-model="alert"
-      type="error"
-      transition="scale-transition"
-      dismissible
-    >
-      {{ errorAlert }}
-    </v-alert>
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4 lg3>
@@ -72,8 +64,6 @@ export default {
       password: '',
       loading: false,
       redirect: undefined,
-      errorAlert: '登录失败',
-      alert: false,
       dictionary: {
         attributes: {
           username: 'username',
@@ -114,8 +104,11 @@ export default {
               that.$router.push({ path: that.redirect || '/' })
             }).catch((error) => {
               that.loading = false
-              that.alert = true
-              that.errorAlert = error.response.data
+              that.$tips.showTips({
+                color: 'error',
+                text: error.response.data || error,
+                timeout: 3000
+              })
             })
           }
         })

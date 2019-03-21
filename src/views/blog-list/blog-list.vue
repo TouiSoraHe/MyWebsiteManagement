@@ -120,7 +120,11 @@ export default {
         item.deleted = !item.deleted
         item.released = !item.released
         this.loading = false
-        this.setAlert('error', error.response.data || error)
+        this.$tips.showTips({
+          color: 'error',
+          text: error.response.data || error,
+          timeout: 3000
+        })
       })
     },
 
@@ -134,18 +138,19 @@ export default {
         this.loading = false
         this.desserts.splice(this.desserts.indexOf(item), 1)
         this.desserts = [...this.desserts]
+        this.$tips.showTips({
+          color: 'success',
+          text: '删除成功',
+          timeout: 3000
+        })
       }).catch((error) => {
         this.loading = false
-        this.setAlert('error', error.response.data || error)
+        this.$tips.showTips({
+          color: 'error',
+          text: error.response.data || error,
+          timeout: 3000
+        })
       })
-    },
-    setAlert(status, message) {
-      this.alert = true
-      this.alertStatus = status
-      this.alertMessage = message
-      window.setTimeout(() => {
-        this.alert = false
-      }, 3000)
     }
   }
 }

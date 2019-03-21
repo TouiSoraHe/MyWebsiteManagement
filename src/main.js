@@ -5,6 +5,7 @@ import store from './store/store.js'
 
 import '@/plugins/vuetify.js'
 import '@/plugins/vue-simplemde.js'
+import '@/plugins/tips.js'
 import '@/utils/permission.js'
 import '@/utils/utils.js'
 

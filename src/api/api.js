@@ -69,3 +69,24 @@ export function deleteTag(id) {
     method: 'delete'
   })
 }
+
+export function getExceptionInfos() {
+  return request({
+    url: '/api/exception-info',
+    method: 'get'
+  })
+}
+
+export function deleteExceptionInfo(id) {
+  return request({
+    url: '/api/exception-info/' + id,
+    method: 'delete'
+  })
+}
+
+export function getExceptionInfo(id) {
+  return request({
+    url: '/api/exception-info/' + id,
+    method: 'get'
+  })
+}
