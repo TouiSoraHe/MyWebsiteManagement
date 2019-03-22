@@ -1,68 +1,58 @@
 <template>
   <div>
-    <div>
-      <v-alert
-        v-model="alert"
-        :type="alertStatus"
-        transition="scale-transition"
-        dismissible
-      >
-        {{ alertMessage }}
-      </v-alert>
-    </div>
-    <div>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex shrink>
-            <v-data-table
-              :headers="headers"
-              :items="desserts"
-              :loading="loading"
-              class="elevation-1"
-            >
-              <template v-slot:items="props">
-                <td>{{ props.item.title }}</td>
-                <td class="text-xs-right">
-                  {{ props.item.time }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.lastModified }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.words }}
-                </td>
-                <td class="text-xs-right">
-                  {{ props.item.views }}
-                </td>
-                <td>
-                  <v-switch v-model="props.item.released" hide-details @change="releaseItem(props.item)" />
-                </td>
-                <td class="justify-center layout px-0">
-                  <v-icon
-                    small
-                    class="mr-2"
-                    @click="editItem(props.item)"
-                  >
-                    {{ $vuetify.icons['pencil'] }}
-                  </v-icon>
-                  <v-icon
-                    small
-                    @click="deleteItem(props.item)"
-                  >
-                    {{ $vuetify.icons['delete'] }}
-                  </v-icon>
-                </td>
-              </template>
-              <template v-slot:no-data>
-                <v-alert :value="true" color="error">
-                  暂无记录
-                </v-alert>
-              </template>
-            </v-data-table>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </div>
+    <v-container fluid fill-height>
+      <v-layout justify-center align-center>
+        <v-flex shrink>
+          <v-data-table
+            :headers="headers"
+            :items="desserts"
+            :loading="loading"
+            class="elevation-1"
+          >
+            <template v-slot:items="props">
+              <td>
+                {{ props.item.title }}
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.time }}
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.lastModified }}
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.words }}
+              </td>
+              <td class="text-xs-right">
+                {{ props.item.views }}
+              </td>
+              <td>
+                <v-switch v-model="props.item.released" hide-details @change="releaseItem(props.item)" />
+              </td>
+              <td class="justify-center layout px-0">
+                <v-icon
+                  small
+                  class="mr-2"
+                  @click="editItem(props.item)"
+                >
+                  {{ $vuetify.icons['pencil'] }}
+                </v-icon>
+                <v-icon
+                  small
+                  @click="deleteItem(props.item)"
+                >
+                  {{ $vuetify.icons['delete'] }}
+                </v-icon>
+              </td>
+            </template>
+            <template v-slot:no-data>
+              <v-alert :value="true" color="error">
+                暂无记录
+              </v-alert>
+            </template>
+          </v-data-table>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -70,9 +60,6 @@
 export default {
   data: () => ({
     loading: false,
-    alert: false,
-    alertMessage: '',
-    alertStatus: 'error',
     headers: [
       {
         text: '标题',

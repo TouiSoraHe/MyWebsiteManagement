@@ -20,6 +20,12 @@
         </template>
 
         <v-list dense>
+          <v-list-tile>
+            <v-icon>{{ $vuetify.icons['account'] }}</v-icon>&nbsp;
+            <v-list-tile-content>
+              <v-list-tile-title>{{ $store.state.user.userName }}</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
           <v-list-tile @click.stop="$router.push('/')">
             <v-icon>{{ $vuetify.icons['home'] }}</v-icon>&nbsp;
             <v-list-tile-content>
@@ -109,8 +115,6 @@ export default {
       })
     },
     clickLink(path) {
-      console.log(path)
-      console.log(this.$router.currentRoute.fullPath)
       if (this.$router.currentRoute.fullPath === path) {
         this.reloadRoute()
       } else {

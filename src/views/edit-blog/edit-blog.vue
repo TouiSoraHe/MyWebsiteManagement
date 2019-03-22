@@ -1,74 +1,72 @@
 <template>
-  <div>
-    <v-container grid-list-md>
-      <v-layout row wrap>
-        <v-flex xs12>
-          <v-text-field
-            v-model="blog.blogInfo.title"
-            label="标题"
-          />
-        </v-flex>
-        <v-flex xs12>
-          <v-combobox
-            v-model="tagNames"
-            :items="existedTagNames"
-            label="标签"
-            chips
-            clearable
-            multiple
-          >
-            <template v-slot:selection="data">
-              <v-chip
-                :selected="data.selected"
-                close
-                @input="remove(data.item)"
-              >
-                <strong>{{ data.item }}</strong>&nbsp;
-              </v-chip>
-            </template>
-          </v-combobox>
-        </v-flex>
-        <v-flex xs12>
-          <v-textarea
-            v-model="blog.blogInfo.summary"
-            auto-grow
-            label="摘要"
-            rows="1"
-          />
-        </v-flex>
-        <v-flex sm4 xs12>
-          <v-text-field
-            v-model="blog.blogInfo.bgImg.small"
-            label="背景图(小尺寸)"
-            placeholder="图片 URL"
-          />
-        </v-flex>
-        <v-flex sm4 xs12>
-          <v-text-field
-            v-model="blog.blogInfo.bgImg.medium"
-            label="背景图(中尺寸)"
-            placeholder="图片 URL"
-          />
-        </v-flex>
-        <v-flex sm4 xs12>
-          <v-text-field
-            v-model="blog.blogInfo.bgImg.large"
-            label="背景图(大尺寸)"
-            placeholder="图片 URL"
-          />
-        </v-flex>
-        <v-flex xs12>
-          <markdown-editor ref="markdownEditor" v-model="blog.content" />
-        </v-flex>
-        <v-flex xs12>
-          <v-spacer />
-          <v-btn :loading="submitBtnLoading" @click="submit">
-            提交
-          </v-btn>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </div>
+  <v-container grid-list-md>
+    <v-layout row wrap>
+      <v-flex xs12>
+        <v-text-field
+          v-model="blog.blogInfo.title"
+          label="标题"
+        />
+      </v-flex>
+      <v-flex xs12>
+        <v-combobox
+          v-model="tagNames"
+          :items="existedTagNames"
+          label="标签"
+          chips
+          clearable
+          multiple
+        >
+          <template v-slot:selection="data">
+            <v-chip
+              :selected="data.selected"
+              close
+              @input="remove(data.item)"
+            >
+              <strong>{{ data.item }}</strong>&nbsp;
+            </v-chip>
+          </template>
+        </v-combobox>
+      </v-flex>
+      <v-flex xs12>
+        <v-textarea
+          v-model="blog.blogInfo.summary"
+          auto-grow
+          label="摘要"
+          rows="1"
+        />
+      </v-flex>
+      <v-flex sm4 xs12>
+        <v-text-field
+          v-model="blog.blogInfo.bgImg.small"
+          label="背景图(小尺寸)"
+          placeholder="图片 URL"
+        />
+      </v-flex>
+      <v-flex sm4 xs12>
+        <v-text-field
+          v-model="blog.blogInfo.bgImg.medium"
+          label="背景图(中尺寸)"
+          placeholder="图片 URL"
+        />
+      </v-flex>
+      <v-flex sm4 xs12>
+        <v-text-field
+          v-model="blog.blogInfo.bgImg.large"
+          label="背景图(大尺寸)"
+          placeholder="图片 URL"
+        />
+      </v-flex>
+      <v-flex xs12>
+        <markdown-editor ref="markdownEditor" v-model="blog.content" />
+      </v-flex>
+      <v-flex xs12>
+        <v-spacer />
+        <v-btn :loading="submitBtnLoading" @click="submit">
+          提交
+        </v-btn>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
