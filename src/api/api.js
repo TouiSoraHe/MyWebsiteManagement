@@ -25,6 +25,24 @@ export function getBlogInfos() {
   })
 }
 
+export function getBlogInfosById(blogInfoIds) {
+  let first = true
+  let parametersString = ''
+  blogInfoIds.forEach((id) => {
+    if (!first) {
+      parametersString += '&'
+    }
+    parametersString += 'id=' + id
+    if (first) {
+      first = false
+    }
+  })
+  return request({
+    url: '/api/blog-info?' + parametersString,
+    method: 'get'
+  })
+}
+
 export function updateBlogInfo(bloginfo) {
   return request({
     url: '/api/blog-info/' + bloginfo.id,
@@ -60,6 +78,29 @@ export function getTags() {
   return request({
     url: '/api/tag',
     method: 'get'
+  })
+}
+
+export function getTag(id) {
+  return request({
+    url: '/api/tag/' + id,
+    method: 'get'
+  })
+}
+
+export function updateTag(tag) {
+  return request({
+    url: '/api/tag/' + tag.id,
+    method: 'put',
+    data: tag
+  })
+}
+
+export function addTag(tag) {
+  return request({
+    url: '/api/tag',
+    method: 'post',
+    data: tag
   })
 }
 

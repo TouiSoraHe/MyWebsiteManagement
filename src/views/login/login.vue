@@ -6,7 +6,7 @@
           <v-card class="elevation-12">
             <v-toolbar dark>
               <v-toolbar-title>登录</v-toolbar-title>
-              <v-spacer />
+              <v-spacer></v-spacer>
             </v-toolbar>
             <v-card-text>
               <v-form>
@@ -20,7 +20,7 @@
                   data-vv-name="username"
                   required
                   :error-messages="errors.collect('username')"
-                />
+                ></v-text-field>
                 <v-text-field
                   id="password"
                   v-model="password"
@@ -32,11 +32,11 @@
                   data-vv-name="password"
                   required
                   :error-messages="errors.collect('password')"
-                />
+                ></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
-              <v-spacer />
+              <v-spacer></v-spacer>
               <v-btn :loading="loading" @click="login">
                 登录
               </v-btn>

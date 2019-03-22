@@ -57,6 +57,38 @@ export default new Router({
       ]
     },
     {
+      path: '/tag-management',
+      component: Layout,
+      redirect: '/tag-management/tag-list',
+      name: 'tag-management',
+      meta: { title: '标签管理', icon: 'tag', navbar: true, group: true },
+      children: [
+        {
+          path: 'tag-list',
+          name: 'tag-list',
+          component: () => import('@/views/tag-list/tag-list.vue'),
+          meta: { title: '标签列表', icon: 'view-list', navbar: true }
+        },
+        {
+          path: 'add-tag',
+          name: 'add-tag',
+          components: {
+            default: () => import('@/views/edit-tag/edit-tag.vue')
+          },
+          meta: { title: '新增标签', icon: 'plus', navbar: true }
+        },
+        {
+          path: 'edit-tag/:id',
+          name: 'edit-tag',
+          components: {
+            default: () => import('@/views/edit-tag/edit-tag.vue')
+          },
+          props: { default: true },
+          meta: { title: '编辑标签', icon: '' }
+        }
+      ]
+    },
+    {
       path: '/exception-list',
       component: Layout,
       name: 'exception-list',

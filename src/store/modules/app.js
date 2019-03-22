@@ -1,4 +1,8 @@
-import { getBlogInfos, updateBlogInfo, getBlog, getTags, addBlog, updateBlog, deleteBlog, getExceptionInfos, deleteExceptionInfo, getExceptionInfo } from '@/api/api.js'
+import { getBlogInfos, updateBlogInfo, getBlogInfosById
+  , getBlog, addBlog, updateBlog, deleteBlog
+  , getTags, getTag, updateTag, addTag
+  , getExceptionInfos, deleteExceptionInfo, getExceptionInfo
+} from '@/api/api.js'
 
 const app = {
   state: {
@@ -37,9 +41,45 @@ const app = {
         })
       })
     },
+    GetBlogInfosByIds({ commit }, blogInfoIds) {
+      return new Promise((resolve, reject) => {
+        getBlogInfosById(blogInfoIds).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
     GetTags({ commit }) {
       return new Promise((resolve, reject) => {
         getTags().then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetTag({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        getTag(id).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    UpdateTag({ commit }, tag) {
+      return new Promise((resolve, reject) => {
+        updateTag(tag).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    AddTag({ commit }, tag) {
+      return new Promise((resolve, reject) => {
+        addTag(tag).then(response => {
           resolve(response)
         }).catch(error => {
           reject(error)

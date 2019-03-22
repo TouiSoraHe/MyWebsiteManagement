@@ -5,7 +5,7 @@
         <v-text-field
           v-model="blog.blogInfo.title"
           label="标题"
-        />
+        ></v-text-field>
       </v-flex>
       <v-flex xs12>
         <v-combobox
@@ -33,34 +33,34 @@
           auto-grow
           label="摘要"
           rows="1"
-        />
+        ></v-textarea>
       </v-flex>
       <v-flex sm4 xs12>
         <v-text-field
           v-model="blog.blogInfo.bgImg.small"
           label="背景图(小尺寸)"
           placeholder="图片 URL"
-        />
+        ></v-text-field>
       </v-flex>
       <v-flex sm4 xs12>
         <v-text-field
           v-model="blog.blogInfo.bgImg.medium"
           label="背景图(中尺寸)"
           placeholder="图片 URL"
-        />
+        ></v-text-field>
       </v-flex>
       <v-flex sm4 xs12>
         <v-text-field
           v-model="blog.blogInfo.bgImg.large"
           label="背景图(大尺寸)"
           placeholder="图片 URL"
-        />
+        ></v-text-field>
       </v-flex>
       <v-flex xs12>
-        <markdown-editor ref="markdownEditor" v-model="blog.content" />
+        <markdown-editor ref="markdownEditor" v-model="blog.content"></markdown-editor>
       </v-flex>
       <v-flex xs12>
-        <v-spacer />
+        <v-spacer></v-spacer>
         <v-btn :loading="submitBtnLoading" @click="submit">
           提交
         </v-btn>

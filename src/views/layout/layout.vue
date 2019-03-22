@@ -5,9 +5,9 @@
       app
       clipped-right
     >
-      <v-toolbar-side-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>{{ this.$router.currentRoute.meta.title }}</v-toolbar-title>
-      <v-spacer />
+      <v-spacer></v-spacer>
       <v-menu open-on-hover offset-y transition="scale-transition">
         <template v-slot:activator="{ on }">
           <v-avatar
@@ -92,7 +92,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-content>
-      <router-view />
+      <router-view></router-view>
     </v-content>
   </div>
 </template>
@@ -115,13 +115,9 @@ export default {
       })
     },
     clickLink(path) {
-      if (this.$router.currentRoute.fullPath === path) {
-        this.reloadRoute()
-      } else {
-        this.$router.push({
-          path
-        })
-      }
+      this.$router.push({
+        path
+      })
     },
     reloadRoute() {
       var curruntPath = this.$router.history.current.fullPath

@@ -44,7 +44,7 @@
             </table>
           </v-card-text>
           <v-card-actions>
-            <v-spacer />
+            <v-spacer></v-spacer>
             <v-btn icon :loading="deleteBtnLoading" @click="deleteExceptionInfo">
               <v-icon>{{ this.$vuetify.icons['delete'] }}</v-icon>
             </v-btn>

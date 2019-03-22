@@ -42,9 +42,7 @@
             </td>
           </template>
           <template v-slot:no-data>
-            <v-alert :value="true" color="error">
-              暂无记录
-            </v-alert>
+            暂无记录
           </template>
         </v-data-table>
       </v-flex>

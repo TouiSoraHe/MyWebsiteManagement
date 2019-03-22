@@ -182,6 +182,15 @@ module.exports = {
     'template-curly-spacing': [2, 'never'],
     'use-isnan': 2,
     'valid-typeof': 2,
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "never",
+        "normal": "never",
+        "component": "never"
+      },
+      "svg": "always",
+      "math": "always"
+    }],
     'wrap-iife': [2, 'any'],
     'yield-star-spacing': [2, 'both'],
     'yoda': [2, 'never'],

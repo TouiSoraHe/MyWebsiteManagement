@@ -17,6 +17,7 @@ Vue.use(Vuetify, {
     'pencil': 'mdi-pencil',
     'filter-variant': 'mdi-filter-variant',
     'bug': 'mdi-android-debug-bridge',
-    'eye': 'mdi-eye'
+    'eye': 'mdi-eye',
+    'tag': 'mdi-tag'
   }
 })

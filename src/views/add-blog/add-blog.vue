@@ -1,5 +1,5 @@
 <template>
-  <edit-blog />
+  <edit-blog></edit-blog>
 </template>
 
 <script>

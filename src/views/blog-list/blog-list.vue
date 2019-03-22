@@ -26,7 +26,7 @@
                 {{ props.item.views }}
               </td>
               <td>
-                <v-switch v-model="props.item.released" hide-details @change="releaseItem(props.item)" />
+                <v-switch v-model="props.item.released" hide-details @change="releaseItem(props.item)"></v-switch>
               </td>
               <td class="justify-center layout px-0">
                 <v-icon
@@ -45,9 +45,7 @@
               </td>
             </template>
             <template v-slot:no-data>
-              <v-alert :value="true" color="error">
-                暂无记录
-              </v-alert>
+              暂无记录
             </template>
           </v-data-table>
         </v-flex>
