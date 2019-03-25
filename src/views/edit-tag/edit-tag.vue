@@ -73,10 +73,15 @@
         </v-card>
       </v-flex>
       <v-flex xs12>
-        <v-spacer></v-spacer>
-        <v-btn :loading="submitBtnLoading" @click="submit">
-          提交
-        </v-btn>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn v-if="id" :loading="deleteBtnLoading" @click="deleteTag">
+            删除标签
+          </v-btn>
+          <v-btn :loading="submitBtnLoading" @click="submit">
+            提交
+          </v-btn>
+        </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -100,7 +105,8 @@ export default {
         blogInfoIDs: []
       },
       blogInfos: [],
-      submitBtnLoading: false
+      submitBtnLoading: false,
+      deleteBtnLoading: false
     }
   },
   computed: {
@@ -187,6 +193,27 @@ export default {
             timeout: 3000
           })
           this.submitBtnLoading = false
+        })
+      }
+    },
+    deleteTag() {
+      if (confirm('确认删除标签?')) {
+        this.deleteBtnLoading = true
+        this.$store.dispatch('DeleteTag', this.tag.id).then(response => {
+          this.deleteBtnLoading = false
+          this.$tips.showTips({
+            color: 'success',
+            text: '删除成功',
+            timeout: 2000
+          })
+          this.$router.push('/tag-management/tag-list')
+        }).catch(error => {
+          this.deleteBtnLoading = false
+          this.$tips.showTips({
+            color: 'error',
+            text: error.response.data || error,
+            timeout: 3000
+          })
         })
       }
     }

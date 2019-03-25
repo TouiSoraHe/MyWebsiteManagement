@@ -1,6 +1,6 @@
 import { getBlogInfos, updateBlogInfo, getBlogInfosById
   , getBlog, addBlog, updateBlog, deleteBlog
-  , getTags, getTag, updateTag, addTag
+  , getTags, getTag, updateTag, addTag, deleteTag
   , getExceptionInfos, deleteExceptionInfo, getExceptionInfo
 } from '@/api/api.js'
 
@@ -80,6 +80,15 @@ const app = {
     AddTag({ commit }, tag) {
       return new Promise((resolve, reject) => {
         addTag(tag).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    DeleteTag({ commit }, id) {
+      return new Promise((resolve, reject) => {
+        deleteTag(id).then(response => {
           resolve(response)
         }).catch(error => {
           reject(error)

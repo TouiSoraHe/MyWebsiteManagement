@@ -60,10 +60,12 @@
         <markdown-editor ref="markdownEditor" v-model="blog.content"></markdown-editor>
       </v-flex>
       <v-flex xs12>
-        <v-spacer></v-spacer>
-        <v-btn :loading="submitBtnLoading" @click="submit">
-          提交
-        </v-btn>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn :loading="submitBtnLoading" @click="submit">
+            提交
+          </v-btn>
+        </v-card-actions>
       </v-flex>
     </v-layout>
   </v-container>
