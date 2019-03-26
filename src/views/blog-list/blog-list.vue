@@ -107,7 +107,7 @@ export default {
         this.loading = false
         this.$tips.showTips({
           color: 'error',
-          text: error.response.data || error,
+          text: error.response ? error.response.data || error : error,
           timeout: 3000
         })
       })
@@ -132,7 +132,7 @@ export default {
         this.loading = false
         this.$tips.showTips({
           color: 'error',
-          text: error.response.data || error,
+          text: error.response ? error.response.data || error : error,
           timeout: 3000
         })
       })

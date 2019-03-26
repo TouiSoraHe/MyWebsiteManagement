@@ -155,7 +155,7 @@ export default {
         }).catch(error => {
           this.$tips.showTips({
             color: 'error',
-            text: error.response.data || error,
+            text: error.response ? error.response.data || error : error,
             timeout: 3000
           })
           this.submitBtnLoading = false
@@ -173,7 +173,7 @@ export default {
         }).catch(error => {
           this.$tips.showTips({
             color: 'error',
-            text: error.response.data || error,
+            text: error.response ? error.response.data || error : error,
             timeout: 3000
           })
           this.submitBtnLoading = false

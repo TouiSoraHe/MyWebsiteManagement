@@ -106,7 +106,7 @@ export default {
               that.loading = false
               that.$tips.showTips({
                 color: 'error',
-                text: error.response.data || error,
+                text: error.response ? error.response.data || error : error,
                 timeout: 3000
               })
             })

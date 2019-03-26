@@ -32,7 +32,7 @@ service.interceptors.response.use(
   },
   error => {
     console.error(error) // for debug
-    if (error.response.status === 401 && error.response.request.responseURL.indexOf('/login') === -1) {
+    if (error.response && error.response.status === 401 && error.response.request.responseURL.indexOf('/login') === -1) {
       store.dispatch('FedLogOut').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
