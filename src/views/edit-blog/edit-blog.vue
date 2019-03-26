@@ -133,11 +133,11 @@ export default {
           text: error.response.data || error
         })
       })
-      this.$store.dispatch('GetTags').then((response) => {
-        this.tags = response.data
-      }).catch(() => {
-      })
     }
+    this.$store.dispatch('GetTags').then((response) => {
+      this.tags = response.data
+    }).catch(() => {
+    })
   },
   methods: {
     submit() {
