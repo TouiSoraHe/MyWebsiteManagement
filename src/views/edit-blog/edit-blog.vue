@@ -73,6 +73,7 @@
 
 <script>
 import { markdownEditor } from 'vue-simplemde'
+import { getBlog, setBlog, removeBlog } from '@/utils/blog.js'
 
 export default {
   components: {
@@ -87,13 +88,16 @@ export default {
   data() {
     return {
       blog: {
+        id: this.id,
         blogInfo: {
           bgImg: {},
           tags: []
         }
       },
       tags: [],
-      submitBtnLoading: false
+      submitBtnLoading: false,
+      needSaveBlog: false,
+      saveBlogIntervalId: undefined
     }
   },
   computed: {
@@ -121,18 +125,46 @@ export default {
         names.push(item.tagName)
       })
       return names
+    },
+    blogContent() {
+      return this.blog.content
     }
   },
+  watch: {
+    blogContent(newValue, oldValue) {
+      if (oldValue === undefined) return
+      this.needSaveBlog = true
+    }
+  },
+  mounted() {
+    this.saveBlogIntervalId = setInterval(() => {
+      if (this.needSaveBlog) {
+        this.needSaveBlog = false
+        this.saveBlog()
+      }
+    }, 10000)
+  },
+  beforeDestroy() {
+    if (this.needSaveBlog) {
+      this.needSaveBlog = false
+      this.saveBlog()
+    }
+    clearInterval(this.saveBlogIntervalId)
+  },
   created() {
+    const blog = getBlog(this.blog)
     if (this.id) {
-      this.$store.dispatch('GetBlog', this.id).then((response) => {
-        this.blog = response.data
-      }).catch((error) => {
-        this.$tips.showTips({
-          color: 'error',
-          text: error.response.data || error
-        })
-      })
+      if (blog) {
+        if (confirm('检测到本地有未上传的副本,是否使用本地副本')) {
+          this.blog = blog
+        } else {
+          this.getBlogFromServer()
+        }
+      } else {
+        this.getBlogFromServer()
+      }
+    } else if (blog) {
+      this.blog = blog
     }
     this.$store.dispatch('GetTags').then((response) => {
       this.tags = response.data
@@ -145,6 +177,7 @@ export default {
       this.submitBtnLoading = true
       if (this.id === undefined) {
         this.$store.dispatch('AddBlog', this.blog).then(response => {
+          this.deleteBlog()
           this.$tips.showTips({
             color: 'success',
             text: '新建成功',
@@ -163,6 +196,7 @@ export default {
         // 说明这是编辑
       } else {
         this.$store.dispatch('UpdateBlog', this.blog).then(response => {
+          this.deleteBlog()
           this.$tips.showTips({
             color: 'success',
             text: '修改成功',
@@ -180,9 +214,29 @@ export default {
         })
       }
     },
+    getBlogFromServer() {
+      this.$store.dispatch('GetBlog', this.id).then((response) => {
+        this.blog = response.data
+        this.needSaveBlog = false
+      }).catch((error) => {
+        this.$tips.showTips({
+          color: 'error',
+          text: error.response.data || error
+        })
+      })
+    },
     remove(item) {
       this.tagNames.splice(this.tagNames.indexOf(item), 1)
       this.tagNames = [...this.tagNames]
+    },
+    saveBlog() {
+      setBlog(this.blog)
+    },
+    loadBlog() {
+      this.blog = getBlog(this.blog) || this.blog
+    },
+    deleteBlog() {
+      removeBlog(this.blog)
     }
   }
 }
