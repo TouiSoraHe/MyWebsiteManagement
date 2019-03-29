@@ -158,6 +158,7 @@ export default {
         if (confirm('检测到本地有未上传的副本,是否使用本地副本')) {
           this.blog = blog
         } else {
+          this.deleteBlog(this.blog)
           this.getBlogFromServer()
         }
       } else {

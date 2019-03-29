@@ -6,7 +6,7 @@ export function getBlog(blog) {
     } else {
       BlogKey += 'new'
     }
-    const blogJson = sessionStorage.getItem(BlogKey)
+    const blogJson = localStorage.getItem(BlogKey)
     if (blogJson) {
       return JSON.parse(blogJson)
     } else {
@@ -25,7 +25,7 @@ export function setBlog(blog) {
     } else {
       BlogKey += 'new'
     }
-    return sessionStorage.setItem(BlogKey, JSON.stringify(blog))
+    return localStorage.setItem(BlogKey, JSON.stringify(blog))
   } else {
     return undefined
   }
@@ -39,7 +39,7 @@ export function removeBlog(blog) {
     } else {
       BlogKey += 'new'
     }
-    return sessionStorage.removeItem(BlogKey)
+    return localStorage.removeItem(BlogKey)
   } else {
     return undefined
   }

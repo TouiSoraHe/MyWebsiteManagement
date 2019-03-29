@@ -55,6 +55,9 @@ export default {
   methods: {
     showTips() {
       this.switch = true
+      if (this.color === 'error') {
+        console.error(this.text)
+      }
       if (this.timeoutID) {
         clearTimeout(this.timeoutID)
         this.timeoutID = null
