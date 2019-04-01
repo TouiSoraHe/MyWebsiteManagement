@@ -2,6 +2,7 @@ import { getBlogInfos, updateBlogInfo, getBlogInfosById
   , getBlog, addBlog, updateBlog, deleteBlog
   , getTags, getTag, updateTag, addTag, deleteTag
   , getExceptionInfos, deleteExceptionInfo, getExceptionInfo
+  , getBloggerInfo, updateBloggerInfo
 } from '@/api/api.js'
 
 const app = {
@@ -144,6 +145,24 @@ const app = {
     UpdateBlog({ commit }, blog) {
       return new Promise((resolve, reject) => {
         updateBlog(blog).then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    GetBloggerInfo({ commit }) {
+      return new Promise((resolve, reject) => {
+        getBloggerInfo().then(response => {
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+    UpdateBloggerInfo({ commit }, bloggerInfo) {
+      return new Promise((resolve, reject) => {
+        updateBloggerInfo(bloggerInfo).then(response => {
           resolve(response)
         }).catch(error => {
           reject(error)

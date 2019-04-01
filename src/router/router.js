@@ -14,6 +14,7 @@ export default new Router({
     {
       path: '/home',
       component: Layout,
+      redirect: '/home/Home',
       name: 'home',
       meta: { title: '首页', icon: 'home', navbar: true, group: false },
       children: [
@@ -25,7 +26,21 @@ export default new Router({
         }
       ]
     },
-
+    {
+      path: '/blogger-info-management',
+      component: Layout,
+      redirect: '/blog-management/blogger-info',
+      name: 'blogger-info-management',
+      meta: { title: '博主信息', icon: 'account', navbar: true, group: false },
+      children: [
+        {
+          path: 'blogger-info',
+          name: 'blogger-info',
+          component: () => import('@/views/blogger-info/blogger-info.vue'),
+          meta: { title: '博主信息', icon: 'account', navbar: true }
+        }
+      ]
+    },
     {
       path: '/blog-management',
       component: Layout,
@@ -91,6 +106,7 @@ export default new Router({
     {
       path: '/exception-list',
       component: Layout,
+      redirect: '/exception-list/exception',
       name: 'exception-list',
       meta: { title: '异常列表', icon: 'bug', navbar: true, group: false },
       children: [

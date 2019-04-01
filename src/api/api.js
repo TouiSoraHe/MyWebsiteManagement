@@ -131,3 +131,18 @@ export function getExceptionInfo(id) {
     method: 'get'
   })
 }
+
+export function getBloggerInfo() {
+  return request({
+    url: '/api/blogger-info',
+    method: 'get'
+  })
+}
+
+export function updateBloggerInfo(bloggerInfo) {
+  return request({
+    url: '/api/blogger-info',
+    method: 'put',
+    data: bloggerInfo
+  })
+}

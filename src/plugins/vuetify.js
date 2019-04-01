@@ -18,6 +18,7 @@ Vue.use(Vuetify, {
     'filter-variant': 'mdi-filter-variant',
     'bug': 'mdi-android-debug-bridge',
     'eye': 'mdi-eye',
-    'tag': 'mdi-tag'
+    'tag': 'mdi-tag',
+    'information': 'mdi-information'
   }
 })
