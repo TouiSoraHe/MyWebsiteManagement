@@ -125,13 +125,16 @@ export default {
         headImg: {}
       },
       submitBtnLoading: false,
-      dialogInfo: this.initDialogInfo()
+      dialogInfo: {}
     }
   },
   computed: {
   },
   created() {
-    this.getBloggerInfo()
+    this.$nextTick(() => {
+      this.getBloggerInfo()
+      this.resetDialogInfo()
+    })
   },
   methods: {
     getBloggerInfo() {
@@ -153,8 +156,8 @@ export default {
         })
       })
     },
-    initDialogInfo() {
-      return {
+    resetDialogInfo() {
+      this.dialogInfo = {
         switch: false,
         title: 'title',
         label1: 'label1',
@@ -164,9 +167,6 @@ export default {
         type: 0,
         errorMessages: undefined
       }
-    },
-    resetDialogInfo() {
-      this.dialogInfo = this.initDialogInfo()
     },
     dialogOpenOnClick(type) {
       this.resetDialogInfo()
