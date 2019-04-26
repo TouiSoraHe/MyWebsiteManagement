@@ -7,14 +7,14 @@
             <v-layout wrap>
               <v-flex xs12 sm6>
                 <v-text-field
-                  v-model="bloggerInfo.username"
+                  v-model="config.BloggerInfo.name"
                   label="用户名"
                   placeholder="用户名"
                 ></v-text-field>
               </v-flex>
               <v-flex xs12 sm6>
                 <v-text-field
-                  v-model="bloggerInfo.email"
+                  v-model="config.BloggerInfo.email"
                   label="邮箱"
                   placeholder="邮箱地址"
                 ></v-text-field>
@@ -38,11 +38,11 @@
               </v-card-title>
               <v-card-text>
                 <v-flex xs12>
-                  <v-layout v-for="(value,key) in bloggerInfo.contactInformation" :key="key">
+                  <v-layout v-for="(value,key) in config.BloggerInfo.contactInformation" :key="key">
                     <v-flex xs12>
-                      <v-text-field v-model="bloggerInfo.contactInformation[key]" :label="key"></v-text-field>
+                      <v-text-field v-model="config.BloggerInfo.contactInformation[key]" :label="key"></v-text-field>
                     </v-flex>
-                    <v-btn icon @click="$delete(bloggerInfo.contactInformation, key)">
+                    <v-btn icon @click="$delete(config.BloggerInfo.contactInformation, key)">
                       <v-icon>{{ $vuetify.icons['delete'] }}</v-icon>
                     </v-btn>
                   </v-layout>
@@ -63,11 +63,11 @@
               </v-card-title>
               <v-card-text>
                 <v-flex xs12>
-                  <v-layout v-for="(value,key) in bloggerInfo.headImg" :key="key">
+                  <v-layout v-for="(value,key) in config.bgUrl" :key="key">
                     <v-flex xs12>
-                      <v-text-field v-model="bloggerInfo.headImg[key]" :label="key"></v-text-field>
+                      <v-text-field v-model="config.bgUrl[key]" :label="key"></v-text-field>
                     </v-flex>
-                    <v-btn icon @click="$delete(bloggerInfo.headImg, key)">
+                    <v-btn icon @click="$delete(config.bgUrl, key)">
                       <v-icon>{{ $vuetify.icons['delete'] }}</v-icon>
                     </v-btn>
                   </v-layout>
@@ -120,9 +120,16 @@
 export default {
   data() {
     return {
-      bloggerInfo: {
-        contactInformation: {},
-        headImg: {}
+      config: {
+        bgUrl: {
+          'default': 'https://i.loli.net/2019/04/26/5cc2a033011c3.jpg'
+        },
+        BloggerInfo: {
+          name: '遠空',
+          email: '',
+          contactInformation: {
+          }
+        }
       },
       submitBtnLoading: false,
       dialogInfo: {}
@@ -139,11 +146,11 @@ export default {
   methods: {
     getBloggerInfo() {
       this.$store.dispatch('GetBloggerInfo').then(response => {
-        this.bloggerInfo = response.data
+        Object.assign(this.config, response.data)
       })
     },
     submit() {
-      this.$store.dispatch('UpdateBloggerInfo', this.bloggerInfo).then(response => {
+      this.$store.dispatch('UpdateBloggerInfo', this.config).then(response => {
         this.$tips.showTips({
           color: 'success',
           text: '修改成功'
@@ -180,7 +187,7 @@ export default {
         this.dialogInfo.type = 1
         this.dialogInfo.switch = true
         this.dialogInfo.title = '添加背景图:'
-        this.dialogInfo.label1 = '背景图类型'
+        this.dialogInfo.label1 = '应用地址'
         this.dialogInfo.label2 = '背景图地址'
       }
     },
@@ -188,9 +195,9 @@ export default {
       if (this.dialogInfo.label1Value) {
         this.dialogInfo.switch = false
         if (this.dialogInfo.type === 0) {
-          this.$set(this.bloggerInfo.contactInformation, this.dialogInfo.label1Value, this.dialogInfo.label2Value)
+          this.$set(this.config.BloggerInfo.contactInformation, this.dialogInfo.label1Value, this.dialogInfo.label2Value)
         } else if (this.dialogInfo.type === 1) {
-          this.$set(this.bloggerInfo.headImg, this.dialogInfo.label1Value, this.dialogInfo.label2Value)
+          this.$set(this.config.bgUrl, this.dialogInfo.label1Value, this.dialogInfo.label2Value)
         }
       } else {
         this.dialogInfo.errorMessages = '该项不能为空'
