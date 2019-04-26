@@ -75,6 +75,22 @@
               </v-card-text>
             </v-card>
           </v-flex>
+          <v-flex xs12 sm6>
+            <v-card>
+              <v-card-title>
+                网易云后台设置:
+              </v-card-title>
+              <v-card-text>
+                <v-flex xs12>
+                  <v-layout v-for="(value,key) in config.musicInfo" :key="key">
+                    <v-flex xs12>
+                      <v-text-field v-model="config.musicInfo[key]" :label="key"></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                </v-flex>
+              </v-card-text>
+            </v-card>
+          </v-flex>
         </v-layout>
       </v-flex>
       <v-flex xs12>
@@ -129,6 +145,12 @@ export default {
           email: '',
           contactInformation: {
           }
+        },
+        musicInfo: {
+          uid: '',
+          '登录邮箱': '',
+          '登录密码': '',
+          '后台地址': ''
         }
       },
       submitBtnLoading: false,
